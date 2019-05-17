@@ -66,7 +66,8 @@ class Pasien extends CI_Controller {
                 "password" => $result->password,
                 "alamat" => $result->alamat,
                 "no_telepon" => $result->no_telepon,
-                "jenis_kelamin" => $result->jenis_kelamin
+                "jenis_kelamin" => $result->jenis_kelamin,
+                "foto" => $result->foto
             );
             $this->session->set_userdata('datauser', $sessionarray);
             redirect("pasien/home");
@@ -89,7 +90,7 @@ class Pasien extends CI_Controller {
             $this->load->view('templates/header_login',$data);
             $this->load->view('register_pasien');
             $this->load->view('templates/footer_login');
-            $this->session->set_flashdata('flashregister', 'Tolong isi semua komponen registrasi. Terima kasih');
+            $this->session->set_flashdata('flashregister', 'Tolong isi semua komponen registrasi.');
         } else {
             $e = $this->Pasien_model->cekUsername($this->input->post('username_pasien', true));
             $f = $this->Pasien_model->cekEmail($this->input->post('email_pasien', true));
@@ -107,6 +108,15 @@ class Pasien extends CI_Controller {
             $this->Pasien_model->tambahPasien();
             redirect('pasien/landing_pasien');
         }
+    }
+
+    public function profil(){
+        $data['title'] = 'Telkomedika - Profil';
+        $data_pasien = $this->Pasien_model->GetAllPasien();
+
+        $this->load->view('templates/header_home',$data);
+        $this->load->view('profil_pasien',['data' => $data_pasien]);
+        $this->load->view('templates/footer_index');
     }
 
     public function LihatJadwalPraktekDokter(){
@@ -141,6 +151,52 @@ class Pasien extends CI_Controller {
             redirect('pasien/home');
         }
         redirect('pasien/PilihJadwalPeriksa');
+    }
+
+    public function do_upload()
+    {
+
+        $config['upload_path']          =  './assets/gambar/'; //isi dengan nama folder tempat menyimpan gambar
+        $config['allowed_types']        =  'gif|jpg|png'; //isi dengan format/tipe gambar yang diterima
+
+        $this->load->library('upload', $config);
+
+        //lengkapi kondisi berikut
+        if ( ! $this->upload->do_upload('userfile'))
+        {
+            $error = array('error' => $this->upload->display_errors());
+            $this->load->view('V_Upload_form', $error);        
+        }
+        else
+        {
+            $data = array('upload_data' => $this->upload->data());
+            $this->load->view('V_Upload_success', $data);
+        }
+    }
+
+    public function ubahProfil($id){
+        $data['title'] = "Form Ubah Data Profil";
+        $this->form_validation->set_rules("nama","Nama Pasien","required");
+        $this->form_validation->set_rules("username","Username Pasien","required");
+        $this->form_validation->set_rules("email","Email Pasien","required");
+        $this->form_validation->set_rules("jk","Jenis Kelamin Pasien","required");
+        $this->form_validation->set_rules("birth","Tanggal Lahir Pasien","required");
+        $this->form_validation->set_rules("notelpon","No Telepon Pasien","required");
+        $this->form_validation->set_rules("foto","Foto Profil");
+        $this->form_validation->set_rules("alamat","Alamat Pasien","required");
+
+        $data['pasien'] = $this->Pasien_model->getPasienById($id);
+        if ($this->form_validation->run()){
+            $this->session->set_flashdata('berhasil', 'Diubah');
+            $this->Pasien_model->ubahProfil($this->input->post('id',true));
+            redirect('pasien/profil');
+        }
+        else{
+            // $data['obat'] = $this->Apoteker_model->GetAllItem();
+            $this->load->view('templates/header_home',$data);
+            $this->load->view('ubah_profil',$data);
+            $this->load->view('templates/footer_index');
+        }
     }
 
     public function logout(){

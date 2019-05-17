@@ -13,9 +13,8 @@
                  </div>
              </div>
          </div>
-      <?php endif; ?>            
-      <a href="#"><button type="button" class="btn btn-primary">TAMBAH JADWAL PRAKTEK</button></a>
-      <br><br>
+      <?php endif; ?>           
+      <br>
       <table class="table table-bordered" id="table">
         <thead>
           <tr>

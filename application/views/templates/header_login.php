@@ -48,6 +48,23 @@
             cursor: pointer;
             background: #46de4b;
         }
+        /* html,body {
+            margin:0;
+            padding:0;
+            height:100%;
+        }
+        .content {
+            padding:10px;
+            padding-bottom:80px;
+        } */
+        /* .footerbar {
+            width:100%;
+            height:80px;
+            position: relative;
+            bottom:0;
+            left:0;
+            flex-shrink: 0;
+        } */
     </style>
 </head>
 <body style="font-family: sans-serif; background: #d5f0f3;">

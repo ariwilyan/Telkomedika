@@ -1,4 +1,4 @@
-<div style="background-image: url(<?php echo base_url('assets/gambar/PEOP.jpg'); ?>); width: 100%; height: 100%; position: fixed; background-repeat: no-repeat; background-size: cover;">
+<div style="background-image: url(<?php echo base_url('assets/gambar/PEOP.jpg'); ?>); width: 100%; height: 100%; position: relative; background-repeat: no-repeat; background-size: cover;">
     <!-- Header Navbar -->
     <nav class="navbar navbar-expand-sm bg-info navbar-info justify-content-center fixed-top">
         <!-- Logo -->
@@ -7,17 +7,20 @@
         </a>
     </nav>
 
-    <div style="width: 450px; background: white; margin: 100px auto; padding: 10px 20px 20px; border-radius: 6px;">
+    <div style="width: 450px; background: white; margin: 70px auto; padding: 10px 20px 20px; border-radius: 6px;">
         <h2 style="text-align: center; font-style: bold;">Telkomedika</h4>
         <h5 style="text-align: center; margin-bottom: 20px;">Register Form - Pasien</h5>
 
         <?php
             if ($this->session->flashdata('flashregister')){
         ?>
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <?php
             echo $this->session->flashdata('flashregister');
         ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
         <?php
             }

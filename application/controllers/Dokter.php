@@ -93,7 +93,7 @@ class Dokter extends CI_Controller {
         }else{
             $this->load->view('templates/header_dokter',$data);
             $this->load->view('ubah_jadwal',$data);
-            $this->load->view('templates/footer_home');
+            $this->load->view('templates/footer_index');
         }
     }
 

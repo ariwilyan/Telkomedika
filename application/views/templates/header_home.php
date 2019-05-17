@@ -52,7 +52,22 @@
 	    }
 	    body {
 		    background-color: #D8D8D8;
-	    }
+        }
+        /* img {
+	        width: 70px;
+	        margin-right: 10px;
+        } */
+        .foto{
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+        }
+        .profile-header {
+            background-color: #C58200;
+            padding: 24px;
+            text-align: center;
+            margin-top: 50px;
+        }
     </style>
 </head>
 <body>
@@ -92,6 +107,7 @@
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#"><?php echo $nama?></a>
+                    <a class="dropdown-item" href="<?= base_url()?>pasien/profil">Profil</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="<?php echo base_url("pasien/logout"); ?>" onclick="return confirm('Apakah anda yakin untuk keluar ?');">Logout</a>
                 </div>
